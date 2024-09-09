@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Looking",
+                    "type": "Button",
+                    "id": "b43d0dde-866c-408d-8475-4ace98531829",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -130,6 +139,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveShifting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1098ffcf-f31a-45a4-a99c-c10c6a6c1213",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Looking",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

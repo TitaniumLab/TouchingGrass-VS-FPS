@@ -10,6 +10,7 @@ namespace GrassVsFps
         [SerializeField] private float _defaultMoveSpeed = 5;
         [SerializeField] private float _shiftMoveSpeed = 10;
         [SerializeField] private float _camRotationSpeed = 1;
+        private bool _isLooking = false;
         private Vector3 _moveDirection = Vector3.zero;
         private Vector2 _deltaCamRotation = Vector2.zero;
         [SerializeField] private Transform _cameraTransform;
@@ -23,7 +24,7 @@ namespace GrassVsFps
         private void Update()
         {
             //Rotation
-            if (_deltaCamRotation != Vector2.zero)
+            if (_isLooking && _deltaCamRotation != Vector2.zero)
             {
                 float xAxisAngle = -_deltaCamRotation.y * _camRotationSpeed;
                 float yAxisAngle = _deltaCamRotation.x * _camRotationSpeed;
@@ -40,6 +41,28 @@ namespace GrassVsFps
                 var vMove = new Vector3(0, _moveDirection.y, 0);
                 _cameraTransform.Translate(hMove * _moveSpeed * Time.deltaTime);
                 _cameraTransform.Translate(vMove * _moveSpeed * Time.deltaTime, Space.World);
+            }
+        }
+
+
+        public void OnLooking(InputAction.CallbackContext context)
+        {
+            switch (context.ReadValue<float>())
+            {
+                case 1:
+                    {
+                        _isLooking = true;
+                        Cursor.visible = false;
+                        Cursor.lockState = CursorLockMode.Locked;
+                        break;
+                    }
+                case 0:
+                    {
+                        _isLooking = false;
+                        Cursor.visible = true;
+                        Cursor.lockState = CursorLockMode.None;
+                        break;
+                    }
             }
         }
 
