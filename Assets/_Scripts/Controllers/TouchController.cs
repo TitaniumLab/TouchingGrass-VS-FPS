@@ -13,30 +13,47 @@ namespace GrassVsFps
         private static bool _isTouching = false;
         public static bool IsTouching { get { return _isTouching; } }
 
+
+        #region Internal
         private void Awake()
         {
             _toggle.isOn = _isTouching;
             _toggle.onValueChanged.AddListener(delegate { Rebuild(); });
         }
 
+
         private void OnDestroy()
         {
             _toggle.onValueChanged.RemoveListener(delegate { Rebuild(); });
         }
 
-        public void Rebuild()
-        {
-            _isTouching = _toggle.isOn;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.TryGetComponent(out ITouchable touchable))
             {
-                Debug.Log("Enter");
+                touchable.StartTouching();
             }
         }
+
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (other.TryGetComponent(out ITouchable touchable))
+            {
+                //touchable.Touching(
+            }
+        }
+
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.TryGetComponent(out ITouchable touchable))
+            {
+                touchable.StopTouching();
+            }
+        }
+
 
         void Update()
         {
@@ -45,5 +62,14 @@ namespace GrassVsFps
                 Debug.Log("LeftClick");
             }
         }
+        #endregion
+
+        #region Methods
+        public void Rebuild()
+        {
+            _isTouching = _toggle.isOn;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        #endregion
     }
 }

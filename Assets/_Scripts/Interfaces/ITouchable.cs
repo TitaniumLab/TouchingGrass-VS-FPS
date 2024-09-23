@@ -4,7 +4,17 @@ namespace GrassVsFps
 {
     public interface ITouchable
     {
-        public void EnableWind(bool isEnabled);
-        public void SetRotation(Vector3 eulerRotation);
+        /// <summary>
+        /// Action when touch starts
+        /// </summary>
+        public void StartTouching();
+        /// <summary>
+        /// Action during Touch
+        /// </summary>
+        public void Touching(Vector3 touchPos, float maxDistance);
+        /// <summary>
+        /// Action when touch stops
+        /// </summary>
+        public void StopTouching();
     }
 }

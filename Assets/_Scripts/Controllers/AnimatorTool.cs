@@ -21,5 +21,10 @@ namespace GrassVsFps
             Vector3 right = -Vector3.Cross(_data.WindDirection, Vector3.up);
             return Quaternion.Slerp(Quaternion.AngleAxis(-_data.MaxRotation, right), Quaternion.AngleAxis(_data.MaxRotation, right), noise);
         }
+
+        public static Quaternion GetTouchRotation(this Vector3 pos, Vector3 touchPos,float maxDistance)
+        {
+
+        }
     }
 }

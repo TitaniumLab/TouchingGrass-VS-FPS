@@ -2,9 +2,10 @@ using UnityEngine;
 
 namespace GrassVsFps
 {
-    public class IndividualGrassAnimator : MonoBehaviour
+    public class IndividualGrassAnimator : MonoBehaviour, ITouchable
     {
         private Vector3 _pos; // It grants 5% more fps then "transform.position" :D
+        private bool _isTouching;
 
         private void Update()
         {
@@ -15,6 +16,23 @@ namespace GrassVsFps
         public void Init(Vector3 pos)
         {
             _pos = pos;
+        }
+
+        public void StartTouching()
+        {
+            _isTouching = true;
+        }
+
+
+        public void Touching(Vector3 touchPos, float maxDistance)
+        {
+            
+        }
+
+
+        public void StopTouching()
+        {
+            _isTouching = false;
         }
     }
 }
