@@ -22,9 +22,13 @@ namespace GrassVsFps
             return Quaternion.Slerp(Quaternion.AngleAxis(-_data.MaxRotation, right), Quaternion.AngleAxis(_data.MaxRotation, right), noise);
         }
 
-        public static Quaternion GetTouchRotation(this Vector3 pos, Vector3 touchPos,float maxDistance)
+        public static Quaternion GetTouchRotation(this Vector3 pos, Vector3 touchPos, float maxDistance, float maxAngle)
         {
-
+            var direction = pos - touchPos;
+            float distance = direction.magnitude;
+            float relativeDistance = 1 - Mathf.Clamp(distance, 0, maxDistance) / maxDistance;
+            Vector3 right = -Vector3.Cross(direction, Vector3.up);
+            return Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.AngleAxis(maxAngle, right), relativeDistance);
         }
     }
 }

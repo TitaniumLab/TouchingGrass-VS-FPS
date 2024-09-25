@@ -2,6 +2,45 @@
     "name": "DefaultInput",
     "maps": [
         {
+            "name": "World Interactions",
+            "id": "93951aba-01be-44ae-9093-17ac521ad7d7",
+            "actions": [
+                {
+                    "name": "Touch",
+                    "type": "Button",
+                    "id": "011d8231-3e6a-4bf5-9952-c910e8498959",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "77f0b7cd-3afa-40bf-94b7-c60e8b5fccaf",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "206214c7-1d85-412d-b892-803c58eaf5a7",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Touch",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
             "name": "Camera",
             "id": "efcbe3de-3fa8-4032-8ea4-3d2f6f87b3d6",
             "actions": [

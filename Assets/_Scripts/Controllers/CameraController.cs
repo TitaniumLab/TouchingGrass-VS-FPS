@@ -47,6 +47,7 @@ namespace GrassVsFps
 
         public void OnLooking(InputAction.CallbackContext context)
         {
+            Debug.Log("Look");
             switch (context.ReadValue<float>())
             {
                 case 1:
