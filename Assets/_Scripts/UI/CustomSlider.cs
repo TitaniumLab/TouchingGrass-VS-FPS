@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -56,7 +55,6 @@ namespace GrassVsFps
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            Debug.Log(_lastValue);
             if (value != _lastValue)
             {
                 _onEndDragAndValueChanged?.Invoke(value);

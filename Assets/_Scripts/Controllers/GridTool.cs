@@ -6,15 +6,21 @@ namespace GrassVsFps
 {
     public class GridTool : MonoBehaviour
     {
-        [SerializeField] private CustomSlider _slider;
+        private CustomSlider _slider;
         private const int GROUND_SIZE = 100;
         private static int _grassDencity = 1;
         public static int GetUnitsCount => (int)Mathf.Pow(GROUND_SIZE * _grassDencity, 2);
 
-
-        private void Awake()
+        private void Start()
         {
+            _slider = UIController.Instance.CurrentHUD.CustomSlider;
             _slider.value = _grassDencity;
+            _slider.OnEndDragAndValueChanged.AddListener(delegate { RebuildGrid(); });
+        }
+
+        private void OnDestroy()
+        {
+            _slider?.OnEndDragAndValueChanged.RemoveListener(delegate { RebuildGrid(); });
         }
 
 

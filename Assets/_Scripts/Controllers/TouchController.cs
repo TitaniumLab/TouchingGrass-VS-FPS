@@ -30,16 +30,24 @@ namespace GrassVsFps
         #region Internal
         private void Awake()
         {
-            _toggle = UIController.Instance.TouchToggle;
-            _toggle.isOn = _canTouch;
-            _toggle.onValueChanged.AddListener(delegate { Rebuild(); });
-
             _collRad = GetComponent<SphereCollider>().radius;
             _maxDistance = _minDistance + _collRad;
 
             _camera = Camera.main;
 
             _plane = new Plane(_touchPlaneNorm, 0);
+        }
+
+        private void OnEnable()
+        {
+            _toggle = UIController.Instance.CurrentHUD.TouchToggle;
+            _toggle.isOn = _canTouch;
+            _toggle.onValueChanged.AddListener(delegate { Rebuild(); });
+        }
+
+        private void OnDisable()
+        {
+            _toggle.onValueChanged.RemoveListener(delegate { Rebuild(); });
         }
 
 
@@ -112,7 +120,6 @@ namespace GrassVsFps
 
         public void OnTouch(InputAction.CallbackContext context)
         {
-            Debug.Log("Click");
             if (Cursor.visible)
                 switch (context.ReadValue<float>())
                 {

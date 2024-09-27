@@ -21,9 +21,9 @@ namespace GrassVsFps
                 }
             });
 
-            UIController.Instance.SetCountText(GridTool.GetUnitsCount);
-            UIController.Instance.SetTouchTypeText("Trigger + Interface");
-            UIController.Instance.SetSceneName("Individual scripts");
+            UIController.Instance.CurrentHUD.CountVolue = GridTool.GetUnitsCount.ToString();
+            UIController.Instance.CurrentHUD.TouchTypeText = "Trigger + Interface";
+            UIController.Instance.CurrentHUD.SceneName = "Individual scripts";
         }
     }
 }
