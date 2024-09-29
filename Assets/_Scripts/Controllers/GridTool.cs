@@ -31,15 +31,17 @@ namespace GrassVsFps
         }
 
 
-        public static void CreateGrid(Action<Vector3> action)
+        public static void CreateGrid(Action<Vector3, int> action)
         {
             int grassInRow = GROUND_SIZE * _grassDencity;
             float distance = (float)GROUND_SIZE / grassInRow;
+            int i = 0;
             for (int x = 0; x < grassInRow; x++)
             {
                 for (int z = 0; z < grassInRow; z++)
                 {
-                    action(new Vector3(x * distance, 0, z * distance));
+                    action(new Vector3(x * distance, 0, z * distance), i);
+                    i++;
                 }
             }
         }

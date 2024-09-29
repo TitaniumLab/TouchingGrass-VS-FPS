@@ -11,7 +11,7 @@ namespace GrassVsFps
         /// <summary>
         /// Action during Touch
         /// </summary>
-        public void Touching(Vector3 touchPos, float maxDistance);
+        public void Touching(Vector3 touchPos, float maxDistance, float maxAngle);
         /// <summary>
         /// Action when touch stops
         /// </summary>

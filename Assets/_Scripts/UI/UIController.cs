@@ -57,7 +57,7 @@ namespace GrassVsFps
             }
             int fps = (int)(1 / (totalTime / FPS_TOTAL_SAMPLES));
             fps = Mathf.Clamp(fps, 0, 999999);
-            CurrentHUD.FpsVolue = fps.ToString();
+            CurrentHUD.SetFpsVolue = fps.ToString();
         }
     }
 }

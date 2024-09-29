@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -15,7 +16,13 @@ namespace GrassVsFps
         [Tooltip("Distance from the toucher to the plane while touching"), SerializeField]
         private float _minDistance = 1.0f;
         private float _maxDistance;
-        [SerializeField] private float _verticalSpeed = 1f;
+        [SerializeField]
+        private float _verticalSpeed = 1f;
+        [SerializeField]
+        private TouchType _touchType;
+        [SerializeField]
+        private float _maxTouchAngle = 70;
+        private List<Transform> _touchedTransforms = new List<Transform>();
         private Toggle _toggle;
         private float _relDis = 1.0f;
         private Plane _plane;
@@ -53,27 +60,35 @@ namespace GrassVsFps
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.TryGetComponent(out ITouchable touchable))
+            if (_touchType == TouchType.Interface && other.TryGetComponent(out ITouchable touchable))
             {
                 touchable.StartTouching();
+            }
+            else if (other.CompareTag("Grass"))
+            {
+                _touchedTransforms.Add(other.transform);
             }
         }
 
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.TryGetComponent(out ITouchable touchable))
+            if (_touchType == TouchType.Interface && other.TryGetComponent(out ITouchable touchable))
             {
-                touchable.Touching(_pos, _collRad);
+                touchable.Touching(_pos, _collRad, _maxTouchAngle);
             }
         }
 
 
         private void OnTriggerExit(Collider other)
         {
-            if (other.TryGetComponent(out ITouchable touchable))
+            if (_touchType == TouchType.Interface && other.TryGetComponent(out ITouchable touchable))
             {
                 touchable.StopTouching();
+            }
+            else if (other.CompareTag("Grass"))
+            {
+                _touchedTransforms.Remove(other.transform);
             }
         }
 
@@ -105,8 +120,20 @@ namespace GrassVsFps
                 var pos = transform.position;
                 transform.position = CalculateVerticalPosition(pos);
             }
+        }
 
 
+        private void LateUpdate()
+        {
+            if (_touchType == TouchType.Tag)
+            {
+                for (int i = 0; i < _touchedTransforms.Count; i++)
+                {
+                    var transf = _touchedTransforms[i];
+                    var rot = transf.position.GetTouchRotation(_pos, _collRad, _maxTouchAngle);
+                    transf.rotation = rot;
+                }
+            }
         }
         #endregion
 
@@ -144,5 +171,11 @@ namespace GrassVsFps
             return pos;
         }
         #endregion
+
+        private enum TouchType
+        {
+            Interface = 0,
+            Tag = 1
+        }
     }
 }

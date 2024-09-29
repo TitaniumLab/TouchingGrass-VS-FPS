@@ -9,7 +9,7 @@ namespace GrassVsFps
 
         private void Start()
         {
-            GridTool.CreateGrid((Vector3 position) =>
+            GridTool.CreateGrid((Vector3 position, int i) =>
             {
                 var obj = Instantiate(_prefab, position, Quaternion.identity, _parent);
                 obj.AddComponent<IndividualGrassAnimator>().
@@ -21,9 +21,9 @@ namespace GrassVsFps
                 }
             });
 
-            UIController.Instance.CurrentHUD.CountVolue = GridTool.GetUnitsCount.ToString();
-            UIController.Instance.CurrentHUD.TouchTypeText = "Trigger + Interface";
-            UIController.Instance.CurrentHUD.SceneName = "Individual scripts";
+            UIController.Instance.CurrentHUD.SetCountVolue = GridTool.GetUnitsCount.ToString();
+            UIController.Instance.CurrentHUD.SetTouchTypeText = "Trigger + Interface";
+            UIController.Instance.CurrentHUD.SetSceneName = "Individual scripts \ncached position";
         }
     }
 }

@@ -12,10 +12,10 @@ namespace GrassVsFps
         [SerializeField] private TextMeshProUGUI _sceneName;
 
 
-        public string FpsVolue { set { _fpsText.text = $"FPS: {value}"; } }
-        public string CountVolue { set { _countText.text = $"Count: {value}"; } }
-        public string TouchTypeText { set { _touchTypeText.text = value; } }
-        public string SceneName { set { _sceneName.text = value; } }
+        public string SetFpsVolue { set { _fpsText.text = $"FPS: {value}"; } }
+        public string SetCountVolue { set { _countText.text = $"Count: {value}"; } }
+        public string SetTouchTypeText { set { _touchTypeText.text = value; } }
+        public string SetSceneName { set { _sceneName.text = value; } }
 
 
         [field: SerializeField] public Toggle TouchToggle { get; private set; }

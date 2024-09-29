@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 242556290}
   - component: {fileID: 242556291}
   - component: {fileID: 242556292}
-  - component: {fileID: 242556294}
+  - component: {fileID: 242556293}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -219,7 +219,7 @@ MonoBehaviour:
   _windDirection: {x: -1, y: 0, z: 1}
   _noiseScale: 0.1
   _noiseSpeed: 1
---- !u!114 &242556294
+--- !u!114 &242556293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -228,7 +228,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 242556289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac206435fe4c5d40aa24ce90111d2a6, type: 3}
+  m_Script: {fileID: 11500000, guid: 4f85a9fb432ea4f4eb866902c3affcce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _prefab: {fileID: 652218637154041959, guid: 5a86212939478a342b6b65a2f1abdbdb, type: 3}
@@ -836,6 +836,8 @@ MonoBehaviour:
   _touchPlaneNorm: {x: 0, y: 1, z: 0}
   _minDistance: 2.5
   _verticalSpeed: 2
+  _touchType: 1
+  _maxTouchAngle: 70
 --- !u!135 &1547726176
 SphereCollider:
   m_ObjectHideFlags: 0

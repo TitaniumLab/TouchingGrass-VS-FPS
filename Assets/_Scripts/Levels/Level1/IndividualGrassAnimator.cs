@@ -5,7 +5,6 @@ namespace GrassVsFps
     public class IndividualGrassAnimator : MonoBehaviour, ITouchable
     {
         private Vector3 _pos; // It grants 5% more fps then "transform.position" :D
-        private float _maxAngle = 70;
         private bool _isTouching;
 
         private void Update()
@@ -30,9 +29,9 @@ namespace GrassVsFps
         }
 
 
-        public void Touching(Vector3 touchPos, float maxDistance)
+        public void Touching(Vector3 touchPos, float maxDistance, float maxAngle)
         {
-            var rot = _pos.GetTouchRotation(touchPos, maxDistance, _maxAngle);
+            var rot = _pos.GetTouchRotation(touchPos, maxDistance, maxAngle);
             transform.rotation = rot;
         }
 
