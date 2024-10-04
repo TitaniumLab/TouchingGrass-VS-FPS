@@ -9,8 +9,20 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: e3eb0112c369bc547bcb163da947d5a8
   - enabled: 1
-    path: Assets/Scenes/IndividualComponents.unity
-    guid: 05f24d2b39f45ba4a990e3bfb2a13a89
+    path: Assets/Scenes/1.IndividualComponents.unity
+    guid: dda0d6664e4fdc248ba233ba689a7404
+  - enabled: 1
+    path: Assets/Scenes/2.GrassManager.unity
+    guid: 4eda1c8b236fac84fa9e9042a94edc30
+  - enabled: 1
+    path: Assets/Scenes/3.DrawCallBatching.unity
+    guid: d2e52028b8256b041887115e901602eb
+  - enabled: 1
+    path: Assets/Scenes/4.GPUInstancing.unity
+    guid: 04deee1b51cff5a4696fc882185b429b
+  - enabled: 1
+    path: Assets/Scenes/5.GPUInstancing+Jobs+Burst.unity
+    guid: 11f6a5833e8e15d47bd4d72a452218d3
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: c6eda1f9ee0ca9044b7a40a59b82a7d8,
       type: 2}

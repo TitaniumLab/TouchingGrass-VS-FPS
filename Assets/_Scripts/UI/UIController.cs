@@ -8,7 +8,7 @@ namespace GrassVsFps
         [SerializeField] private MyHUD _myHudPrefab;
         public MyHUD CurrentHUD { get; private set; }
         public static UIController Instance;
-        private const int FPS_TOTAL_SAMPLES = 5;
+        private const int FPS_TOTAL_SAMPLES = 10;
         private float[] _fpsSamples = new float[FPS_TOTAL_SAMPLES];
         private int _fpsSampleIndex;
 
