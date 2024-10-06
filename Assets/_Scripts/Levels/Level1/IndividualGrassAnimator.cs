@@ -14,8 +14,6 @@ namespace GrassVsFps
                 var rot = _pos.GetNoiseRotation(Time.time);
                 transform.rotation = rot;
             }
-
-
         }
 
         public void Init(Vector3 pos)

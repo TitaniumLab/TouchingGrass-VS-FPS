@@ -8,13 +8,11 @@ namespace GrassVsFps
     {
         [SerializeField] private TextMeshProUGUI _fpsText;
         [SerializeField] private TextMeshProUGUI _countText;
-        [SerializeField] private TextMeshProUGUI _touchTypeText;
         [SerializeField] private TextMeshProUGUI _sceneName;
 
 
         public string SetFpsVolue { set { _fpsText.text = $"FPS: {value}"; } }
         public string SetCountVolue { set { _countText.text = $"Count: {value}"; } }
-        public string SetTouchTypeText { set { _touchTypeText.text = value; } }
         public string SetSceneName { set { _sceneName.text = value; } }
 
 

@@ -22,8 +22,7 @@ namespace GrassVsFps
             });
 
             UIController.Instance.CurrentHUD.SetCountVolue = GridTool.GetUnitsCount.ToString();
-            UIController.Instance.CurrentHUD.SetTouchTypeText = "Trigger + Interface";
-            UIController.Instance.CurrentHUD.SetSceneName = "Individual scripts \ncached position";
+            UIController.Instance.CurrentHUD.SetSceneName = "Individual scripts";
         }
     }
 }

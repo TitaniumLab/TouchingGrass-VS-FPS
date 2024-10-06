@@ -19,10 +19,7 @@ namespace GrassVsFps
         [SerializeField]
         private float _verticalSpeed = 1f;
         [SerializeField]
-        private TouchType _touchType;
-        [SerializeField]
         private float _maxTouchAngle = 70;
-        private List<Transform> _touchedTransforms = new List<Transform>();
         private Toggle _toggle;
         private float _relDis = 1.0f;
         private Plane _plane;
@@ -32,6 +29,8 @@ namespace GrassVsFps
         private static bool _canTouch = false;
         private bool _isTouching = false;
         public static bool IsTouching { get { return _canTouch; } }
+        public float MaxTouchAngle { get { return _maxTouchAngle; } }
+        public float ColliderRadius { get { return _collRad; } }
 
 
         #region Internal
@@ -60,20 +59,16 @@ namespace GrassVsFps
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_touchType == TouchType.Interface && other.TryGetComponent(out ITouchable touchable))
+            if (other.TryGetComponent(out ITouchable touchable))
             {
                 touchable.StartTouching();
-            }
-            else if (other.CompareTag("Grass"))
-            {
-                _touchedTransforms.Add(other.transform);
             }
         }
 
 
         private void OnTriggerStay(Collider other)
         {
-            if (_touchType == TouchType.Interface && other.TryGetComponent(out ITouchable touchable))
+            if (other.TryGetComponent(out ITouchable touchable))
             {
                 touchable.Touching(_pos, _collRad, _maxTouchAngle);
             }
@@ -82,17 +77,13 @@ namespace GrassVsFps
 
         private void OnTriggerExit(Collider other)
         {
-            if (_touchType == TouchType.Interface && other.TryGetComponent(out ITouchable touchable))
+            if (other.TryGetComponent(out ITouchable touchable))
             {
                 touchable.StopTouching();
             }
-            else if (other.CompareTag("Grass"))
-            {
-                _touchedTransforms.Remove(other.transform);
-            }
         }
 
-
+        // Calc position of couch controller
         void Update()
         {
             _pos = transform.position;
@@ -119,20 +110,6 @@ namespace GrassVsFps
                 _relDis = _relDis < 1 ? _relDis + Time.deltaTime * _verticalSpeed : 1;
                 var pos = transform.position;
                 transform.position = CalculateVerticalPosition(pos);
-            }
-        }
-
-
-        private void LateUpdate()
-        {
-            if (_touchType == TouchType.Tag)
-            {
-                for (int i = 0; i < _touchedTransforms.Count; i++)
-                {
-                    var transf = _touchedTransforms[i];
-                    var rot = transf.position.GetTouchRotation(_pos, _collRad, _maxTouchAngle);
-                    transf.rotation = rot;
-                }
             }
         }
         #endregion
@@ -171,11 +148,5 @@ namespace GrassVsFps
             return pos;
         }
         #endregion
-
-        private enum TouchType
-        {
-            Interface = 0,
-            Tag = 1
-        }
     }
 }

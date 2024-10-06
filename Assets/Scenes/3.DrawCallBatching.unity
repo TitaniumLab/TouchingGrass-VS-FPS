@@ -233,6 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _prefab: {fileID: 652218637154041959, guid: ae2e8839eab959947bb3e6cf373ac0ca, type: 3}
   _parent: {fileID: 241306580}
+  _touchController: {fileID: 1547726175}
 --- !u!1 &295019612
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,8 +837,7 @@ MonoBehaviour:
   _touchPlaneNorm: {x: 0, y: 1, z: 0}
   _minDistance: 2.5
   _verticalSpeed: 2
-  _touchType: 1
-  _maxTouchAngle: 70
+  _maxTouchAngle: 170
 --- !u!135 &1547726176
 SphereCollider:
   m_ObjectHideFlags: 0

@@ -217,13 +217,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maxRotation: 60
   _windDirection: {x: -1, y: 0, z: 1}
-  _windDirectionBurst:
-    x: -1
-    y: 0
-    z: 1
   _noiseScale: 0.1
   _noiseSpeed: 1
-  _angle: 0
 --- !u!114 &242556293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -239,6 +234,10 @@ MonoBehaviour:
   _mesh: {fileID: -462981019419857548, guid: d6f1317c4dc21794d9d2aa408d8d603e, type: 3}
   _material: {fileID: 2100000, guid: a2fd122281c16c442ac2425478b15aa3, type: 2}
   _scale: {x: 100, y: 100, z: 100}
+  _touchController: {fileID: 1547726175}
+  _touchablePrefab: {fileID: 5346018242455334829, guid: 7bd3c243d1760004593336b39bb1290e,
+    type: 3}
+  _parentTransform: {fileID: 241306580}
 --- !u!1 &295019612
 GameObject:
   m_ObjectHideFlags: 0

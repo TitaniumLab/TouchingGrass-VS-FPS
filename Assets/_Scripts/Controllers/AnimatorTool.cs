@@ -29,7 +29,7 @@ namespace GrassVsFps
             float distance = direction.magnitude;
             float relativeDistance = 1 - Mathf.Clamp(distance, 0, maxDistance) / maxDistance;
             Vector3 right = -Vector3.Cross(direction, Vector3.up);
-            return Quaternion.Lerp(Quaternion.Euler(0, 0, 0), Quaternion.AngleAxis(maxAngle, right), relativeDistance);
+            return Quaternion.SlerpUnclamped(Quaternion.Euler(0, 0, 0), Quaternion.AngleAxis(maxAngle, right), relativeDistance);
         }
 
         public static quaternion GetBurstNoiseRotation(this Vector3 pos, float time)
@@ -43,6 +43,16 @@ namespace GrassVsFps
             quaternion minAngle = quaternion.AxisAngle(right, 0); // IDK Why doesn't it work like in Mathf ¯\_(ツ)_/¯
             quaternion maxAngle = quaternion.AxisAngle(right, (AnimatorData.BURST_MAX_ROTATION / 180) * math.PI);
             return math.normalize(math.slerp(minAngle, maxAngle, myNoise));
+        }
+
+        public static Quaternion GetBurstTouchRotation(this Vector3 pos, Vector3 touchPos, float maxDistance, float maxAngle)
+        {
+            var direction = pos - touchPos;
+            float distance = direction.magnitude;
+            float relativeDistance = 1 - math.clamp(distance, 0, maxDistance) / maxDistance;
+            float3 right = -math.cross(direction, new float3(0, 1, 0));
+            float angle = maxAngle / 180 * math.PI;
+            return math.nlerp(quaternion.Euler(float3.zero), quaternion.AxisAngle(right, angle), relativeDistance);
         }
     }
 }

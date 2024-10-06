@@ -836,6 +836,7 @@ MonoBehaviour:
   _touchPlaneNorm: {x: 0, y: 1, z: 0}
   _minDistance: 2.5
   _verticalSpeed: 2
+  _maxTouchAngle: 170
 --- !u!135 &1547726176
 SphereCollider:
   m_ObjectHideFlags: 0
