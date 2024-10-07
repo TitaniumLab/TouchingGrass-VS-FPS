@@ -67,6 +67,7 @@ namespace GrassVsFps
         {
             _nativePositions.Dispose();
             _nativeMatrixs.Dispose();
+            _nativeIsTouched.Dispose();
             Touchable.OnTouch -= ChangeTouchState;
         }
 
