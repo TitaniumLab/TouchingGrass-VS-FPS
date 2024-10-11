@@ -9,7 +9,7 @@ namespace GrassVsFps
     {
         [SerializeField] private Mesh _mesh;
         [SerializeField] private Material _material;
-        [SerializeField] internal Vector3 _scale = new Vector3(100, 100, 100);
+        [SerializeField] private Vector3 _scale = new Vector3(100, 100, 100);
         [SerializeField] private TouchController _touchController;
         [SerializeField] private Touchable _touchablePrefab;
         [SerializeField] private Transform _parentTransform;
