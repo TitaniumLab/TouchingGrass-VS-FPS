@@ -45,6 +45,19 @@ namespace GrassVsFps
             return math.normalize(math.slerp(minAngle, maxAngle, myNoise));
         }
 
+        public static quaternion GetBurstNoiseRotation(this float3 pos, float time)
+        {
+            //noise
+            float totalXOffset = (pos.x * AnimatorData.BURST_NOISE_SCALE) + (time * AnimatorData.BURST_NOISE_SPEED * AnimatorData.BURST_WIND_DIRECTION.normalized.x);
+            float totalZOffset = (pos.z * AnimatorData.BURST_NOISE_SCALE) + (time * AnimatorData.BURST_NOISE_SPEED * AnimatorData.BURST_WIND_DIRECTION.normalized.z);
+            float myNoise = noise.cnoise(new float2(totalXOffset, totalZOffset));
+            //rotation
+            float3 right = -math.cross(AnimatorData.BURST_WIND_DIRECTION, new float3(0, 1, 0));
+            quaternion minAngle = quaternion.AxisAngle(right, 0);
+            quaternion maxAngle = quaternion.AxisAngle(right, (AnimatorData.BURST_MAX_ROTATION / 180) * math.PI);
+            return math.normalize(math.slerp(minAngle, maxAngle, myNoise));
+        }
+
         public static Quaternion GetBurstTouchRotation(this Vector3 pos, Vector3 touchPos, float maxDistance, float maxAngle)
         {
             var direction = pos - touchPos;

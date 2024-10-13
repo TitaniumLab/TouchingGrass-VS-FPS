@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mesh: {fileID: -462981019419857548, guid: d6f1317c4dc21794d9d2aa408d8d603e, type: 3}
   _material: {fileID: 2100000, guid: a2fd122281c16c442ac2425478b15aa3, type: 2}
-  _scale: {x: 100, y: 100, z: 100}
+  _scale: {x: 1, y: 1, z: 1}
   _touchController: {fileID: 1547726175}
   _touchablePrefab: {fileID: 5346018242455334829, guid: 7bd3c243d1760004593336b39bb1290e,
     type: 3}

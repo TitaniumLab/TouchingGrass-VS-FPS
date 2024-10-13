@@ -169,7 +169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GrassPrefab: {fileID: 652218637154041959, guid: ae2e8839eab959947bb3e6cf373ac0ca,
     type: 3}
-  PrefabScale: 0
+  PrefabScale: 100
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

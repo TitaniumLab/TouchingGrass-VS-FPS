@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace GrassVsFps
 {
+    /// <summary>
+    /// After creating the ECS scene, dynamic batching stopped working, but the scene remained
+    /// </summary>
     public class Level3 : MonoBehaviour
     {
         [SerializeField] private GameObject _prefab;
@@ -29,10 +32,10 @@ namespace GrassVsFps
                     obj.AddComponent<MeshCollider>().convex = true;
                     obj.AddComponent<Touchable>().Init(i);
                 }
+
                 _transforms[i] = obj.transform;
                 _positions[i] = pos;
             });
-
             Touchable.OnTouch += ChangeTouchState;
 
             UIController.Instance.CurrentHUD.SetCountVolue = count.ToString();
