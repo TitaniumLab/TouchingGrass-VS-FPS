@@ -41,7 +41,7 @@ namespace GrassVsFps
             //rotation
             float3 right = -math.cross(AnimatorData.BURST_WIND_DIRECTION, new float3(0, 1, 0));
             quaternion minAngle = quaternion.AxisAngle(right, 0); // IDK Why doesn't it work like in Mathf ¯\_(ツ)_/¯
-            quaternion maxAngle = quaternion.AxisAngle(right, (AnimatorData.BURST_MAX_ROTATION / 180) * math.PI);
+            quaternion maxAngle = quaternion.AxisAngle(right, math.radians(AnimatorData.BURST_MAX_ROTATION));
             return math.normalize(math.slerp(minAngle, maxAngle, myNoise));
         }
 
@@ -54,7 +54,7 @@ namespace GrassVsFps
             //rotation
             float3 right = -math.cross(AnimatorData.BURST_WIND_DIRECTION, new float3(0, 1, 0));
             quaternion minAngle = quaternion.AxisAngle(right, 0);
-            quaternion maxAngle = quaternion.AxisAngle(right, (AnimatorData.BURST_MAX_ROTATION / 180) * math.PI);
+            quaternion maxAngle = quaternion.AxisAngle(right, math.radians(AnimatorData.BURST_MAX_ROTATION));
             return math.normalize(math.slerp(minAngle, maxAngle, myNoise));
         }
 
@@ -64,8 +64,7 @@ namespace GrassVsFps
             float distance = direction.magnitude;
             float relativeDistance = 1 - math.clamp(distance, 0, maxDistance) / maxDistance;
             float3 right = -math.cross(direction, new float3(0, 1, 0));
-            float angle = maxAngle / 180 * math.PI;
-            return math.nlerp(quaternion.Euler(float3.zero), quaternion.AxisAngle(right, angle), relativeDistance);
+            return math.nlerp(quaternion.Euler(float3.zero), quaternion.AxisAngle(right, math.radians(maxAngle)), relativeDistance);
         }
     }
 }
