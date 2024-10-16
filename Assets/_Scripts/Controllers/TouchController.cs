@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using Unity.Entities;
+using Unity.Transforms;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -28,6 +30,8 @@ namespace GrassVsFps
         private float _collRad;
         private static bool _canTouch = false;
         private bool _isTouching = false;
+        private EntityManager _entityManager;
+        public static Entity TouchEntity { get; set; }
         public static bool IsTouching { get { return _canTouch; } }
         public float MaxTouchAngle { get { return _maxTouchAngle; } }
         public float ColliderRadius { get { return _collRad; } }
@@ -36,6 +40,8 @@ namespace GrassVsFps
         #region Internal
         private void Awake()
         {
+            _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+
             _collRad = GetComponent<SphereCollider>().radius;
             _maxDistance = _minDistance + _collRad;
 
@@ -97,6 +103,7 @@ namespace GrassVsFps
                     var hit = ray.GetPoint(enter);
                     _relDis = _relDis > 0 ? _relDis - Time.deltaTime * _verticalSpeed : 0;
                     transform.position = CalculateVerticalPosition(hit);
+                    _entityManager.SetComponentData(TouchEntity, LocalTransform.FromPosition(hit));
                 }
                 else
                 {

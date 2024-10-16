@@ -1,29 +1,27 @@
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Physics;
-using UnityEngine;
+using Unity.Physics.Systems;
 
 namespace GrassVsFps
 {
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+    [UpdateAfter(typeof(PhysicsSystemGroup))]
     [BurstCompile]
     public partial struct TestTrigger : ISystem
     {
         [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            new TestJob().Schedule(state.Dependency);
+            new TriggerJob().Schedule(SystemAPI.GetSingleton<SimulationSingleton>(), state.Dependency);
         }
-
     }
 
-    [BurstCompile]
-    internal struct TestJob : ITriggerEventsJob
+    internal partial struct TriggerJob : ITriggerEventsJob
     {
         [BurstCompile]
         public void Execute(TriggerEvent triggerEvent)
         {
-            Debug.Log("event");
         }
     }
 }
