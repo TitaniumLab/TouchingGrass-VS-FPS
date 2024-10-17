@@ -102,21 +102,33 @@ namespace GrassVsFps
                 {
                     var hit = ray.GetPoint(enter);
                     _relDis = _relDis > 0 ? _relDis - Time.deltaTime * _verticalSpeed : 0;
-                    transform.position = CalculateVerticalPosition(hit);
-                    _entityManager.SetComponentData(TouchEntity, LocalTransform.FromPosition(hit));
+                    var pos = CalculateVerticalPosition(hit);
+                    transform.position = pos;
+                    if (_entityManager.Exists(TouchEntity))
+                    {
+                        _entityManager.SetComponentData(TouchEntity, LocalTransform.FromPosition(pos));
+                    }
                 }
                 else
                 {
                     _relDis = _relDis < 1 ? _relDis + Time.deltaTime * _verticalSpeed : 1;
-                    var pos = transform.position;
-                    transform.position = CalculateVerticalPosition(pos);
+                    var pos = CalculateVerticalPosition(transform.position);
+                    transform.position = pos;
+                    if (_entityManager.Exists(TouchEntity))
+                    {
+                        _entityManager.SetComponentData(TouchEntity, LocalTransform.FromPosition(pos));
+                    }
                 }
             }
             else if (_relDis < 1)
             {
                 _relDis = _relDis < 1 ? _relDis + Time.deltaTime * _verticalSpeed : 1;
-                var pos = transform.position;
-                transform.position = CalculateVerticalPosition(pos);
+                var pos = CalculateVerticalPosition(transform.position);
+                transform.position = pos;
+                if (_entityManager.Exists(TouchEntity))
+                {
+                    _entityManager.SetComponentData(TouchEntity, LocalTransform.FromPosition(pos));
+                }
             }
         }
         #endregion

@@ -29,11 +29,14 @@ namespace GrassVsFps
         public float Time;
 
         [BurstCompile]
-        private void Execute(GrassComponent grass, ref LocalTransform transform)
+        private void Execute(ref GrassComponent grass, ref LocalTransform transform)
         {
-            var rot = transform.Position.GetBurstNoiseRotation(Time);
-            // For some reason "transform.Rotate(rot)" doesn't work
-            transform.Rotation = rot;
+            if (!grass.IsTouched)
+            {
+                var rot = transform.Position.GetBurstNoiseRotation(Time);
+                //  For some reason "transform.Rotate(rot)" doesn't work
+                transform.Rotation = rot;
+            }
         }
     }
 }

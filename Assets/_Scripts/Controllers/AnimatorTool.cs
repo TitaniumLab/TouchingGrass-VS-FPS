@@ -66,5 +66,14 @@ namespace GrassVsFps
             float3 right = -math.cross(direction, new float3(0, 1, 0));
             return math.nlerp(quaternion.Euler(float3.zero), quaternion.AxisAngle(right, math.radians(maxAngle)), relativeDistance);
         }
+
+        public static Quaternion GetBurstTouchRotation(this float3 pos, float3 touchPos, float maxDistance, float maxAngle)
+        {
+            Vector3 direction = pos - touchPos;
+            float distance = direction.magnitude;
+            float relativeDistance = 1 - math.clamp(distance, 0, maxDistance) / maxDistance;
+            float3 right = -math.cross(direction, new float3(0, 1, 0));
+            return math.nlerp(quaternion.Euler(float3.zero), quaternion.AxisAngle(right, math.radians(maxAngle)), relativeDistance);
+        }
     }
 }
