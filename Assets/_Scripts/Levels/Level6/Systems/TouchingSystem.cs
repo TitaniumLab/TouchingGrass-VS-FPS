@@ -4,7 +4,6 @@ using Unity.Entities;
 using Unity.Jobs;
 using Unity.Physics;
 using Unity.Physics.Systems;
-using Unity.Transforms;
 
 namespace GrassVsFps
 {
@@ -13,16 +12,14 @@ namespace GrassVsFps
     [BurstCompile]
     public partial struct TouchingSystem : ISystem
     {
+        // Animation using list iteration reduces fps by a third when touching
+        // Moved the implementation to the animation system
         private NativeList<TriggerEvent> _triggerEvents;
-        // The way to get the radius of colliders in ECC is weird. Just set it here
-        private float _maxDistance;
-        private float _maxTouchAngle;
+
 
         public void OnCreate(ref SystemState state)
         {
             _triggerEvents = new NativeList<TriggerEvent>(1, Allocator.Persistent);
-            _maxDistance = 11;
-            _maxTouchAngle = 70;
             state.RequireForUpdate<TouchComponent>();
             state.RequireForUpdate<GrassComponent>();
         }
@@ -50,18 +47,6 @@ namespace GrassVsFps
                 Ecb = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>()
                 .CreateCommandBuffer(state.WorldUnmanaged)
             }.Schedule(SystemAPI.GetSingleton<SimulationSingleton>(), state.Dependency).Complete();
-
-
-            if (!_triggerEvents.IsEmpty)
-            {
-                for (global::System.Int32 i = 0; i < _triggerEvents.Length; i++)
-                {
-                    var grassPos = state.EntityManager.GetComponentData<LocalTransform>(_triggerEvents[i].EntityB).Position;
-                    var touchPos = state.EntityManager.GetComponentData<LocalTransform>(_triggerEvents[i].EntityA).Position;
-                    var rot = grassPos.GetBurstTouchRotation(touchPos, _maxDistance, _maxTouchAngle);
-                    state.EntityManager.SetComponentData(_triggerEvents[i].EntityB, LocalTransform.FromPositionRotationScale(grassPos, rot, 1));
-                }
-            }
         }
 
 
@@ -99,21 +84,4 @@ namespace GrassVsFps
             Ecb.SetComponent(Triggers[index].EntityB, new GrassComponent { IsTouched = false });
         }
     }
-
-    //[BurstCompile]
-    //internal partial struct AnimateTouchJob : IJobFor
-    //{
-    //    public NativeList<TriggerEvent> Triggers;
-    //    public EntityCommandBuffer Ecb;
-    //    public EntityManager Manager;
-
-    //    [BurstCompile]
-    //    public void Execute(int index)
-    //    {
-    //        var grassEntity = Triggers[index].EntityB;
-    //        var touchEntity = Triggers[index].EntityA;
-    //        //var maxDistance = 
-    //        // var rot = Manager.GetComponentData<LocalTransform>(grassEntity).Position.GetBurstTouchRotation(touchPos,)
-    //    }
-    //}
 }

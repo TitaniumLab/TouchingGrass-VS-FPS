@@ -23,7 +23,7 @@ namespace GrassVsFps
         [SerializeField]
         private float _maxTouchAngle = 70;
         private Toggle _toggle;
-        private float _relDis = 1.0f;
+        private float _relDis = 0;
         private Plane _plane;
         private Camera _camera;
         private Vector3 _pos;
