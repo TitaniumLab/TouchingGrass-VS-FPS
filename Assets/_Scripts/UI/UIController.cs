@@ -19,6 +19,7 @@ namespace GrassVsFps
             Instance = this;
 
             CurrentHUD = Instantiate(_myHudPrefab, transform);
+            QualitySettings.vSyncCount = 0;
             Application.targetFrameRate = -1;
             InvokeRepeating(nameof(UpdateFPS), 0, 0.5f);
         }
