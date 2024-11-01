@@ -11,9 +11,11 @@ namespace GrassVsFps
         [SerializeField] private Toggle _fpsToggle;
         [SerializeField] private TMP_Dropdown _displaysDropdown;
         [SerializeField] private TMP_Dropdown _screenModDropdown;
+        private SettingsData _oldSettings;
+
 
         #region Internal
-        private void Start()
+        private void OnEnable()
         {
             // FPS Toggle
             _fpsToggle.isOn = GameSettings.GetTargetFrameRateLock();
@@ -24,47 +26,66 @@ namespace GrassVsFps
             _displaysDropdown.onValueChanged.AddListener(OnDisplayChanhed);
 
             // Screen mod
-            SetDisplaysModsNames();
+            SetScreenModsNames();
             _screenModDropdown.onValueChanged.AddListener(OnScreenModChanged);
+
+
+            _oldSettings = new SettingsData
+            {
+                IsFPSLocked = _fpsToggle.isOn,
+                DisplayIndex = _displaysDropdown.value,
+                ScreenModIndex = _screenModDropdown.value
+            };
         }
 
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             _fpsToggle.onValueChanged.RemoveAllListeners();
             _displaysDropdown.onValueChanged.RemoveAllListeners();
-            _screenModDropdown?.onValueChanged.RemoveAllListeners();
+            _screenModDropdown.onValueChanged.RemoveAllListeners();
         }
         #endregion
 
 
         #region OnAction
-        private void OnFPSToggleChanged(bool value)
+        public void OnFPSToggleChanged(bool value)
         {
             GameSettings.EnableFrameRateCup(value);
         }
 
 
-        private void OnDisplayChanhed(int value)
+        public void OnDisplayChanhed(int value)
         {
             GameSettings.SetDisplay(value);
         }
 
 
-        private void OnScreenModChanged(int value)
+        public void OnScreenModChanged(int value)
         {
             GameSettings.SetScreenMod(value);
-            SetDisplaysModsNames();
+            SetDisplaysNames();
+        }
+
+
+        public void OnOptionsChangeAccept()
+        {
+            gameObject.SetActive(false);
+        }
+
+
+        public void OnOptionsChangeCancel()
+        {
+            _fpsToggle.isOn = _oldSettings.IsFPSLocked;
+            _screenModDropdown.value = _oldSettings.ScreenModIndex;
+            _displaysDropdown.value = _oldSettings.DisplayIndex;
+
+            gameObject.SetActive(false);
         }
         #endregion
-        //public void OnOptionsChangeCancel()
-        //{
-        //    gameObject.SetActive(false);
-        //}
 
 
-
-
+        #region Methods
         private void SetDisplaysNames()
         {
             _displaysDropdown.ClearOptions();
@@ -74,27 +95,30 @@ namespace GrassVsFps
             {
                 options.Add(new TMP_Dropdown.OptionData(displayLayout[i].name));
             }
-            _displaysDropdown.AddOptions(options); // For some reason "_displaysDropdown.options.Add(...)" in loop doesn't set label
+            _displaysDropdown.AddOptions(options);
             var index = displayLayout.IndexOf(Screen.mainWindowDisplayInfo);
             _displaysDropdown.value = index;
         }
 
 
-        private void SetDisplaysModsNames()
+        private void SetScreenModsNames()
         {
             _screenModDropdown.ClearOptions();
+            var options = new List<TMP_Dropdown.OptionData>();
             for (int i = 0; i < GameSettings.FullScreenModes.Length; i++)
             {
                 var name = GameSettings.FullScreenModes[i].ToString();
-                _screenModDropdown.options.Add(new TMP_Dropdown.OptionData(name));
+                options.Add(new TMP_Dropdown.OptionData(name));
             }
+            _screenModDropdown.AddOptions(options);
             var index = Array.FindIndex(GameSettings.FullScreenModes, mod => mod == Screen.fullScreenMode);
             _screenModDropdown.value = index;
         }
+        #endregion
     }
 
 
-    public struct SettingsData
+    internal struct SettingsData
     {
         public bool IsFPSLocked;
         public int DisplayIndex;

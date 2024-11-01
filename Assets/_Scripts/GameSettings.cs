@@ -47,11 +47,9 @@ namespace GrassVsFps
             if (loads == 0)
             {
                 OnFirstGameLoad();
-                Debug.Log("WTF");
             }
             else
             {
-                Debug.Log(Convert.ToBoolean(PlayerPrefs.GetInt("FPSlock")));
                 EnableFrameRateCup(Convert.ToBoolean(PlayerPrefs.GetInt("FPSlock")));
             }
             PlayerPrefs.SetInt("GameLoads", ++loads);
