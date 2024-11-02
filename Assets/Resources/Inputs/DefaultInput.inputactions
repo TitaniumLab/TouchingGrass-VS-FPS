@@ -193,6 +193,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "UI",
+            "id": "bb851e34-3ccc-46d7-ba33-c7e72ddb73e7",
+            "actions": [
+                {
+                    "name": "Close focused layer",
+                    "type": "Button",
+                    "id": "f4bcc9bb-0b77-4f42-a2d8-2f40aefa1a6c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "97b1e99b-1004-48c6-b9f7-1001049d82c6",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Close focused layer",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
