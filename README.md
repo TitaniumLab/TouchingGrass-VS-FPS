@@ -11,3 +11,6 @@ The pet project uses different methods of controlling from 10K to 90K objects on
 -GPU instancing + jobs + burst compile;
 
 -DOTS (ECS + jobs + burst compile).
+
+Build: https://drive.google.com/file/d/1OZ8Ym1ovOwHNeIOdjuouihOwfTQBLl7U/view?usp=sharing
+
